@@ -7,20 +7,9 @@
 name: Lean_5.4内核
 
 on: 
-#  release:
-#    types: [published]
-    
-#  push:
-#    branches: 
-#      - master
+
   repository_dispatch:
   workflow_dispatch:
-  
-  schedule:
-    - cron: 0 */48 * * *
-
-  watch:
-    types: started
 
 env:
   REPO_URL: https://github.com/xakaff/lede
