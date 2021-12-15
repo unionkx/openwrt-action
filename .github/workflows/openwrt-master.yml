@@ -82,7 +82,7 @@ jobs:
       uses: actions/upload-artifact@main
       if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
       with:
-        name: openwrt_bin_master${{ env.FILE_DATE }}
+        name: openwrt_master${{ env.FILE_DATE }}
         path: openwrt/bin
 
     - name: Generate release tag
