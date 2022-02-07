@@ -8,13 +8,13 @@ on:
 env:
   REPO_URL: https://github.com/openwrt/openwrt
   REPO_BRANCH: master
-  CONFIG_FILE: .config
+  CONFIG_FILE: omaster.config
   DIY_P1_SH: diy-part1.sh
   DIY_P2_SH: diy-part2.sh
   UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
   UPLOAD_RELEASE: false
-  TZ: Asia/Shanghai
+  TZ: Asia/Hong_Kong
 
 jobs:
   build:
@@ -41,7 +41,6 @@ jobs:
       run: |
         cd openwrt
         git clone -b master --single-branch https://github.com/openwrt/luci.git luci
-        git clone -b main --single-branch https://github.com/xiaorouji/openwrt-passwall package/passwall
     - name: Update feeds
       run: |
         cd openwrt
