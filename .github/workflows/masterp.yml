@@ -37,13 +37,13 @@ jobs:
     - name: 克隆源代码
       run: |
         df -hT $PWD
-        git clone -b master --single-branch https://github.com/openwrt/openwrt.git openwrt
+        git clone -b master --single-branch https://github.com/coolsnowwolf/lede openwrt
 
     - name: 自定义安装源
       run: |
         cd openwrt
-        git clone -b master --single-branch https://github.com/openwrt/luci.git luci
-        git clone -b main --single-branch https://github.com/xiaorouji/openwrt-passwall package/passwall
+        git clone -b master --single-branch https://github.com/coolsnowwolf/luci luci
+        git clone -b master --single-branch https://github.com/fw876/helloworld package/helloworld
 
     - name: Update feeds
       run: |
