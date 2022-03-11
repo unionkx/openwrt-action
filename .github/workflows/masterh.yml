@@ -8,7 +8,7 @@ on:
 env:
   REPO_URL: https://github.com/openwrt/openwrt
   REPO_BRANCH: master
-  CONFIG_FILE: masterp.config
+  CONFIG_FILE: masterh.config
   DIY_P1_SH: diy-part1.sh
   DIY_P2_SH: diy-part2.sh
   UPLOAD_BIN_DIR: false
@@ -82,7 +82,7 @@ jobs:
       uses: actions/upload-artifact@main
       if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
       with:
-        name: masterp${{ env.FILE_DATE }}
+        name: masterh${{ env.FILE_DATE }}
         path: openwrt/bin
 
     - name: Organize files
@@ -98,7 +98,7 @@ jobs:
       uses: actions/upload-artifact@main
       if: steps.organize.outputs.status == 'success' && !cancelled()
       with:
-        name: masterp${{ env.FILE_DATE }}
+        name: masterh${{ env.FILE_DATE }}
         path: ${{ env.FIRMWARE }}
 
     - name: Delete workflow runs
