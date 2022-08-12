@@ -44,8 +44,7 @@ jobs:
       run: |
         cd openwrt
         git clone -b master --single-branch https://github.com/openwrt/luci luci
-        git clone -b main --single-branch https://github.com/xiaorouji/openwrt-passwall package/passwall
-        git clone -b main --single-branch https://github.com/xiaorouji/openwrt-passwall2 package/passwall2
+        git clone https://github.com/xiaorouji/openwrt-passwall package/passwall
 
     - name: Update feeds
       run: |
@@ -84,7 +83,7 @@ jobs:
       uses: actions/upload-artifact@main
       if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
       with:
-        name: masterh${{ env.FILE_DATE }}
+        name: acrh17p${{ env.FILE_DATE }}
         path: openwrt/bin
 
     - name: Organize files
@@ -100,7 +99,7 @@ jobs:
       uses: actions/upload-artifact@main
       if: steps.organize.outputs.status == 'success' && !cancelled()
       with:
-        name: masterh${{ env.FILE_DATE }}
+        name: acrh17p${{ env.FILE_DATE }}
         path: ${{ env.FIRMWARE }}
 
     - name: Delete workflow runs
