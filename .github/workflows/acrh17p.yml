@@ -45,6 +45,7 @@ jobs:
         cd openwrt
         git clone -b master --single-branch https://github.com/openwrt/luci luci
         git clone https://github.com/xiaorouji/openwrt-passwall package/passwall
+        git clone https://github.com/xiaorouji/openwrt-passwall2 package/passwall2
 
     - name: Update feeds
       run: |
