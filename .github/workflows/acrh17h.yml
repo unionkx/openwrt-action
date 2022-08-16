@@ -1,4 +1,4 @@
-name: Build acrh17p
+name: Build acrh17h
 
 on: 
 
@@ -6,9 +6,9 @@ on:
   workflow_dispatch:
 
 env:
-  REPO_URL: https://github.com/openwrt/openwrt
+  REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
-  CONFIG_FILE: acrh17p.config
+  CONFIG_FILE: acrh17h.config
   DIY_P1_SH: diy-part1.sh
   DIY_P2_SH: diy-part2.sh
   UPLOAD_BIN_DIR: false
@@ -38,14 +38,12 @@ jobs:
     - name: 克隆源代码
       run: |
         df -hT $PWD
-        git clone -b master --single-branch https://github.com/openwrt/openwrt openwrt
+        git clone https://github.com/coolsnowwolf/lede openwrt
 
     - name: 自定义安装源
       run: |
         cd openwrt
-        git clone -b master --single-branch https://github.com/openwrt/luci luci
-        git clone https://github.com/xiaorouji/openwrt-passwall package/passwall
-        git clone https://github.com/xiaorouji/openwrt-passwall2 package/passwall2
+        git clone https://github.com/fw876/helloworld package/helloworld
 
     - name: Update feeds
       run: |
@@ -84,7 +82,7 @@ jobs:
       uses: actions/upload-artifact@main
       if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
       with:
-        name: acrh17p${{ env.FILE_DATE }}
+        name: acrh17h${{ env.FILE_DATE }}
         path: openwrt/bin
 
     - name: Organize files
@@ -100,7 +98,7 @@ jobs:
       uses: actions/upload-artifact@main
       if: steps.organize.outputs.status == 'success' && !cancelled()
       with:
-        name: acrh17p${{ env.FILE_DATE }}
+        name: acrh17h${{ env.FILE_DATE }}
         path: ${{ env.FIRMWARE }}
 
     - name: Delete workflow runs
