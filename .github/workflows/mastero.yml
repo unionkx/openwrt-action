@@ -11,7 +11,6 @@ env:
   REPO_BRANCH: master
   CONFIG_FILE: mastero.config
   CUSTOM_SH: custom.sh
-  FILE_NAME: mastero
 
 jobs:
   build:
@@ -67,7 +66,7 @@ jobs:
     - name: Upload
       uses: actions/upload-artifact@master
       with:
-        name: $FILE_NAME
+        name: mastero
         path: openwrt/bin
 
     - name: Delete workflow runs
