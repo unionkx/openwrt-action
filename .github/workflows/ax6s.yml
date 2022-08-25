@@ -11,6 +11,7 @@ env:
   REPO_BRANCH: master
   CONFIG_FILE: ax6s.config
   CUSTOM_SH: custom.sh
+  FILE_NAME: ax6s
 
 jobs:
   build:
@@ -50,7 +51,6 @@ jobs:
         $GITHUB_WORKSPACE/$CUSTOM_SH
         
     - name: Download package
-      id: package
       run: |
         cd openwrt
         make defconfig
@@ -59,7 +59,6 @@ jobs:
         find dl -size -1024c -exec rm -f {} \;
         
     - name: Build firmware
-      id: compile
       run: |
         cd openwrt
         echo -e "$(nproc) thread compile"
