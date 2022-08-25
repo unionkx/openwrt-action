@@ -51,17 +51,20 @@ jobs:
         $GITHUB_WORKSPACE/$CUSTOM_SH
 
     - name: Download package
-      working-directory: ./openwrt
+      id: package
       run: |
-        make download -j$(nproc)
+        cd openwrt
+        make defconfig
+        make download -j8
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
 
     - name: Build firmware
-      working-directory: ./openwrt
+      id: compile
       run: |
-        echo -e "$(nproc) thread build."
-        make -j$(nproc) V=s
+        cd openwrt
+        echo -e "$(nproc) thread compile"
+        make -j$(nproc) || make -j1 || make -j1 V=s
  
     - name: Upload
       uses: actions/upload-artifact@master
