@@ -73,5 +73,5 @@ jobs:
     - name: Delete workflow runs
       uses: GitRML/delete-workflow-runs@master
       with:
-        retain_days: 5
-        keep_minimum_runs: 0
+        retain_days: 3
+        keep_minimum_runs: 1
