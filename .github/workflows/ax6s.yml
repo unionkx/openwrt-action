@@ -9,9 +9,7 @@ env:
   REPO_URL: https://github.com/openwrt/openwrt
   REPO_BRANCH: master
   CONFIG_FILE: ax6s.config
-  DIY_P1_SH: diy-part1.sh
-  DIY_P2_SH: diy-part2.sh
-  FILE_DATE: date
+  CUSTOM_SH: custom.sh
 
 jobs:
   build:
@@ -46,9 +44,9 @@ jobs:
     - name: Configuration Customization
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
-        chmod +x $DIY_P2_SH
+        chmod +x $CUSTOM_SH
         cd openwrt
-        $GITHUB_WORKSPACE/$DIY_P2_SH
+        $GITHUB_WORKSPACE/$CUSTOM_SH
         
     - name: Download package
       working-directory: ./openwrt
@@ -66,7 +64,7 @@ jobs:
     - name: Upload
       uses: actions/upload-artifact@master
       with:
-        name: $CONFIG_FILE${{ env.FILE_DATE }}
+        name: ax6s
         path: openwrt/bin
 
     - name: Delete workflow runs
