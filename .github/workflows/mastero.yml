@@ -6,11 +6,11 @@ on:
   workflow_dispatch:
 
 env:
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   REPO_URL: https://github.com/openwrt/openwrt
   REPO_BRANCH: master
   CONFIG_FILE: mastero.config
   CUSTOM_SH: custom.sh
+  FILE_NAME: mastero
 
 jobs:
   build:
@@ -45,21 +45,17 @@ jobs:
     - name: Configuration Customization
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
-        chmod +x $CUSTOM_SH
-        cd openwrt
-        $GITHUB_WORKSPACE/$CUSTOM_SH
+        chmod +x ./custom.sh && ./custom.sh
+        cd openwrt && make defconfig
 
     - name: Download package
-      id: package
       run: |
         cd openwrt
-        make defconfig
         make download -j$(nproc)
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
 
     - name: Build firmware
-      id: compile
       run: |
         cd openwrt
         echo -e "$(nproc) thread compile"
@@ -68,7 +64,7 @@ jobs:
     - name: Upload
       uses: actions/upload-artifact@master
       with:
-        name: mastero
+        name: $FILE_NAME
         path: openwrt/bin
 
     - name: Delete workflow runs
