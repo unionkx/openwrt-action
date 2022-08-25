@@ -45,8 +45,9 @@ jobs:
     - name: Configuration Customization
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
-        chmod +x ./custom.sh && ./custom.sh
-        cd openwrt && make defconfig
+        chmod +x $CUSTOM_SH
+        cd openwrt
+        $GITHUB_WORKSPACE/$CUSTOM_SH
 
     - name: Download package
       run: |
