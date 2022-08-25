@@ -41,7 +41,6 @@ jobs:
         cd openwrt
         ./scripts/feeds update -a
         ./scripts/feeds install -a
-        ./scripts/feeds install -a
 
     - name: 自定义配置文件
       run: |
