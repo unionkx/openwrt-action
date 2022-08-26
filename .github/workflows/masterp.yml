@@ -1,20 +1,15 @@
 name: Build masterp
-
 on: 
-
   repository_dispatch:
   workflow_dispatch:
-
 env:
   REPO_URL: https://github.com/openwrt/openwrt
   REPO_BRANCH: master
   CONFIG_FILE: masterp.config
   CUSTOM_SH: custom.sh
-
 jobs:
   build:
     runs-on: ubuntu-22.04
-
     steps:
     - name: Checkout
       uses: actions/checkout@master
@@ -69,7 +64,7 @@ jobs:
       with:
         name: masterp
         path: openwrt/bin
-   
+
     - name: Delete workflow runs
       uses: GitRML/delete-workflow-runs@main
       with:
