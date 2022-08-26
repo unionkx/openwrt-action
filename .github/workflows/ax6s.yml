@@ -1,21 +1,16 @@
 name: Build ax6s
-
 on: 
-
   repository_dispatch:
   workflow_dispatch:
-
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   REPO_URL: https://github.com/openwrt/openwrt
   REPO_BRANCH: master
   CONFIG_FILE: ax6s.config
   CUSTOM_SH: custom.sh
-
 jobs:
   build:
     runs-on: ubuntu-22.04
-
     steps:
     - name: Checkout
       uses: actions/checkout@master
@@ -48,7 +43,7 @@ jobs:
         chmod +x $CUSTOM_SH
         cd openwrt
         $GITHUB_WORKSPACE/$CUSTOM_SH
-        
+
     - name: Download package
       run: |
         cd openwrt
@@ -56,7 +51,7 @@ jobs:
         make download -j$(nproc)
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
-        
+
     - name: Build firmware
       run: |
         cd openwrt
