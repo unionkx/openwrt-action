@@ -65,13 +65,13 @@ jobs:
         make -j$(nproc) V=s
 
     - name: Upload
-      uses: actions/upload-artifact@main
+      uses: actions/upload-artifact@v3
       with:
         name: masterp
         path: openwrt/bin
 
     - name: Delete workflow runs
-      uses: GitRML/delete-workflow-runs@main
+      uses: GitRML/delete-workflow-runs@v3
       with:
         retain_days: 2
         keep_minimum_runs: 1
