@@ -26,11 +26,13 @@ jobs:
         sudo -E apt-get -y install ack antlr3 aria2 asciidoc autoconf automake autopoint binutils bison build-essential bzip2 ccache cmake cpio curl device-tree-compiler fastjar flex gawk gettext gcc-multilib g++-multilib git gperf haveged help2man intltool libc6-dev-i386 libelf-dev libglib2.0-dev libgmp3-dev libltdl-dev libmpc-dev libmpfr-dev libncurses5-dev libncursesw5-dev libreadline-dev libssl-dev libtool lrzsz mkisofs msmtp nano ninja-build p7zip p7zip-full patch pkgconf python3 python3-pip libpython3-dev qemu-utils rsync scons squashfs-tools subversion swig texinfo uglifyjs upx-ucl unzip vim wget xmlto xxd zlib1g-dev
         sudo -E apt-get autoremove -y
         sudo -E apt-get autoclean
+
     - name: Clone source code
       run: |
         git clone -b master --single-branch https://github.com/coolsnowwolf/lede openwrt
         cd openwrt
         git clone -b master --single-branch https://github.com/fw876/helloworld package/helloworld
+
     - name: Update & Install feeds
       run: |
         cd openwrt
@@ -38,12 +40,16 @@ jobs:
         echo "src-git helloworld https://github.com/fw876/helloworld.git" >> "feeds.conf.default"
         ./scripts/feeds update -a
         ./scripts/feeds install -a
+        ./scripts/feeds update helloworld
+        ./scripts/feeds install -a -f -p helloworld
+
     - name: Configuration Customization
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         chmod +x $CUSTOM_SH
         cd openwrt
         $GITHUB_WORKSPACE/$CUSTOM_SH
+
     - name: Download package
       run: |
         cd openwrt
@@ -51,11 +57,13 @@ jobs:
         make download -j$(nproc)
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
+
     - name: Build firmware
       run: |
         cd openwrt
         echo -e "$(nproc) thread compile"
         make -j$(nproc) V=s
+
     - name: Upload
       uses: actions/upload-artifact@main
       with:
