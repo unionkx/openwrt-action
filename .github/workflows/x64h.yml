@@ -34,6 +34,8 @@ jobs:
     - name: Update & Install feeds
       run: |
         cd openwrt
+        sed -i "/helloworld/d" "feeds.conf.default"
+        echo "src-git helloworld https://github.com/fw876/helloworld.git" >> "feeds.conf.default"
         ./scripts/feeds update -a
         ./scripts/feeds install -a
     - name: Configuration Customization
