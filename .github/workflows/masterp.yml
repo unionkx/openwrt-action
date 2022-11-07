@@ -46,6 +46,8 @@ jobs:
         cd openwrt
         ./scripts/feeds update -a
         ./scripts/feeds install -a
+        ./scripts/feeds update luci
+        ./scripts/feeds install -a -p luci
         ./scripts/feeds update passwall
         ./scripts/feeds install -a -f -p passwall
         ./scripts/feeds update passwall2
