@@ -32,11 +32,12 @@ jobs:
         git clone -b master --single-branch https://github.com/openwrt/openwrt.git openwrt
         cd openwrt
         git clone -b master --single-branch https://github.com/openwrt/luci.git luci
-        src-git luci https://github.com/openwrt/luci.git
 
     - name: Update Install feeds
       run: |
         cd openwrt
+        sed -i "/luci/d" "feeds.conf.default"
+        echo "src-git luci https://github.com/openwrt/luci.git" >> "feeds.conf.default"
         ./scripts/feeds update -a
         ./scripts/feeds install -a
         ./scripts/feeds update luci
