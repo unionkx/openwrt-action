@@ -32,6 +32,7 @@ jobs:
         git clone -b master --single-branch https://github.com/openwrt/openwrt.git openwrt
         cd openwrt
         git clone -b master --single-branch https://github.com/openwrt/luci.git luci
+        git clone https://github.com/fw876/helloworld.git package/helloworld
 
     - name: Update & Install feeds
       run: |
