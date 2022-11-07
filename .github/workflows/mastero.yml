@@ -32,12 +32,15 @@ jobs:
         git clone -b master --single-branch https://github.com/openwrt/openwrt.git openwrt
         cd openwrt
         git clone -b master --single-branch https://github.com/openwrt/luci.git luci
+        src-git luci https://github.com/openwrt/luci.git
 
     - name: Update Install feeds
       run: |
         cd openwrt
         ./scripts/feeds update -a
         ./scripts/feeds install -a
+        ./scripts/feeds update luci
+        ./scripts/feeds install -a -p luci
 
     - name: Configuration Customization
       run: |
