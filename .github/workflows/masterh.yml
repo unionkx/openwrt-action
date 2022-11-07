@@ -2,8 +2,8 @@ name: Build masterh
 on: 
   repository_dispatch:
   workflow_dispatch:
-#  schedule:
-#    - cron: 0 2 * * *
+  schedule:
+    - cron: 0 2 * * *
 env:
   REPO_URL: https://github.com/openwrt/openwrt
   REPO_BRANCH: master
@@ -38,15 +38,10 @@ jobs:
         cd openwrt
         sed -i "/helloworld/d" "feeds.conf.default"
         echo "src-git helloworld https://github.com/fw876/helloworld.git" >> "feeds.conf.default"
-        sed -i "/dns2tcp/d" "feeds.conf.default"
-        echo "src-git dns2tcp https://github.com/zfl9/dns2tcp.git" >> "feeds.conf.default"
-        
         ./scripts/feeds update -a
         ./scripts/feeds install -a
         ./scripts/feeds update helloworld
         ./scripts/feeds install -a -f -p helloworld
-        ./scripts/feeds update dns2tcp
-        ./scripts/feeds install -a -f -p dns2tcp
 
     - name: Configuration Customization
       run: |
