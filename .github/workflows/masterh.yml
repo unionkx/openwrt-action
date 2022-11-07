@@ -33,14 +33,18 @@ jobs:
         cd openwrt
         git clone -b master --single-branch https://github.com/openwrt/luci.git luci
         git clone https://github.com/fw876/helloworld.git package/helloworld
+        sed -i "/luci/d" "feeds.conf.default"
+        echo "src-git luci https://github.com/openwrt/luci.git" >> "feeds.conf.default"
+        sed -i "/helloworld/d" "feeds.conf.default"
+        echo "src-git helloworld https://github.com/fw876/helloworld.git" >> "feeds.conf.default"
 
     - name: Update & Install feeds
       run: |
         cd openwrt
-        sed -i "/helloworld/d" "feeds.conf.default"
-        echo "src-git helloworld https://github.com/fw876/helloworld.git" >> "feeds.conf.default"
         ./scripts/feeds update -a
         ./scripts/feeds install -a
+        ./scripts/feeds update luci
+        ./scripts/feeds install -a -p luci
         ./scripts/feeds update helloworld
         ./scripts/feeds install -a -f -p helloworld
 
