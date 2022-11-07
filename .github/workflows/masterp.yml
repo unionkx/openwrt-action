@@ -1,4 +1,4 @@
-name: Build masterc
+name: Build masterp
 on: 
   repository_dispatch:
   workflow_dispatch:
@@ -7,7 +7,7 @@ on:
 env:
   REPO_URL: https://github.com/openwrt/openwrt
   REPO_BRANCH: master
-  CONFIG_FILE: masterc.config
+  CONFIG_FILE: masterp.config
   CUSTOM_SH: custom.sh
 jobs:
   build:
@@ -23,7 +23,7 @@ jobs:
       run: |
         sudo -E apt-get update
         sudo -E apt-get -y full-upgrade
-        sudo -E apt-get -y install build-essential clang flex g++ gawk gcc-multilib gettext git libncurses5-dev libssl-dev python3-distutils rsync unzip zlib1g-dev
+        sudo -E apt-get -y install build-essential asciidoc binutils bzip2 curl gawk gettext git libncurses5-dev libz-dev patch python3 unzip zlib1g-dev lib32gcc1 libc6-dev-i386 subversion flex uglifyjs git-core gcc-multilib p7zip p7zip-full msmtp libssl-dev texinfo libglib2.0-dev xmlto qemu-utils upx libelf-dev autoconf automake libtool autopoint device-tree-compiler g++-multilib antlr3 gperf
         sudo -E apt-get -y autoremove
         sudo -E apt-get autoclean
 
@@ -32,12 +32,22 @@ jobs:
         git clone -b master --single-branch https://github.com/openwrt/openwrt.git openwrt
         cd openwrt
         git clone -b master --single-branch https://github.com/openwrt/luci.git luci
+        git clone https://github.com/xiaorouji/openwrt-passwall package/passwall
+        git clone https://github.com/xiaorouji/openwrt-passwall2 package/passwall2
+        sed -i "/passwall/d" "feeds.conf.default"
+        echo "src-git passwall https://github.com/xiaorouji/openwrt-passwall.git" >> "feeds.conf.default"
+        sed -i "/passwall2/d" "feeds.conf.default"
+        echo "src-git passwall https://github.com/xiaorouji/openwrt-passwall2.git" >> "feeds.conf.default"
 
     - name: Update Install feeds
       run: |
         cd openwrt
         ./scripts/feeds update -a
         ./scripts/feeds install -a
+        ./scripts/feeds update passwall
+        ./scripts/feeds update passwall2
+        ./scripts/feeds install -a -f -p passwall
+        ./scripts/feeds install -a -f -p passwall2
 
     - name: Configuration Customization
       run: |
@@ -63,7 +73,7 @@ jobs:
     - name: Upload
       uses: actions/upload-artifact@v3
       with:
-        name: masterc
+        name: masterp
         path: openwrt/bin
 
     - name: Delete workflow runs
