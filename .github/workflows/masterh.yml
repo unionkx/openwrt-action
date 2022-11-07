@@ -1,13 +1,13 @@
-name: Build x64h
+name: Build masterh
 on: 
   repository_dispatch:
   workflow_dispatch:
 #  schedule:
 #    - cron: 0 2 * * *
 env:
-  REPO_URL: https://github.com/coolsnowwolf/lede
+  REPO_URL: https://github.com/openwrt/openwrt
   REPO_BRANCH: master
-  CONFIG_FILE: x64h.config
+  CONFIG_FILE: masterh.config
   CUSTOM_SH: custom.sh
 jobs:
   build:
@@ -29,19 +29,24 @@ jobs:
 
     - name: Clone source code
       run: |
-        git clone -b master --single-branch https://github.com/coolsnowwolf/lede openwrt
+        git clone -b master --single-branch https://github.com/openwrt/openwrt.git openwrt
         cd openwrt
-        git clone -b master --single-branch https://github.com/fw876/helloworld package/helloworld
+        git clone -b master --single-branch https://github.com/openwrt/luci.git luci
 
     - name: Update & Install feeds
       run: |
         cd openwrt
         sed -i "/helloworld/d" "feeds.conf.default"
         echo "src-git helloworld https://github.com/fw876/helloworld.git" >> "feeds.conf.default"
+        sed -i "/dns2tcp/d" "feeds.conf.default"
+        echo "src-git dns2tcp https://github.com/zfl9/dns2tcp.git" >> "feeds.conf.default"
+        
         ./scripts/feeds update -a
         ./scripts/feeds install -a
         ./scripts/feeds update helloworld
         ./scripts/feeds install -a -f -p helloworld
+        ./scripts/feeds update dns2tcp
+        ./scripts/feeds install -a -f -p dns2tcp
 
     - name: Configuration Customization
       run: |
@@ -67,7 +72,7 @@ jobs:
     - name: Upload
       uses: actions/upload-artifact@main
       with:
-        name: x64h
+        name: masterh
         path: openwrt/bin
 
     - name: Delete workflow runs
