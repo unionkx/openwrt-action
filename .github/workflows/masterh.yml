@@ -35,6 +35,10 @@ jobs:
         git clone -b master --single-branch https://github.com/fw876/helloworld.git package/helloworld
         sed -i "/helloworld/d" "feeds.conf.default"
         echo "src-git helloworld https://github.com/fw876/helloworld.git" >> "feeds.conf.default"
+        echo "src-git ipt2socks https://github.com/immortalwrt/packages/tree/master/net/ipt2socks.git" >> "feeds.conf.default"
+        echo "src-git dns2socks https://github.com/immortalwrt/packages/tree/master/net/dns2socks.git" >> "feeds.conf.default"
+        echo "src-git microsocks https://github.com/immortalwrt/packages/tree/master/net/microsocks.git" >> "feeds.conf.default"
+        echo "src-git redsocks2 https://github.com/immortalwrt/packages/tree/master/net/redsocks2.git" >> "feeds.conf.default"
 
     - name: Update & Install feeds
       run: |
