@@ -1,13 +1,13 @@
-name: Build masterp
+name: Build ax6000
 on: 
   repository_dispatch:
   workflow_dispatch:
   schedule:
-    - cron: 0 3 * * *
+    - cron: 0 5 * * *
 env:
   REPO_URL: https://github.com/openwrt/openwrt
   REPO_BRANCH: master
-  CONFIG_FILE: masterp.config
+  CONFIG_FILE: ax6000.config
   CUSTOM_SH: custom.sh
 jobs:
   build:
@@ -22,9 +22,9 @@ jobs:
         DEBIAN_FRONTEND: noninteractive
       run: |
         sudo -E apt-get update
-        sudo -E apt-get -y full-upgrade
+        sudo -E apt-get full-upgrade -y
         sudo -E apt-get -y install build-essential clang flex g++ gawk gcc-multilib gettext git libncurses5-dev libssl-dev python3-distutils python3 rsync unzip zlib1g-dev asciidoc binutils bzip2 curl patch unzip libc6-dev-i386 subversion uglifyjs p7zip p7zip-full msmtp texinfo libglib2.0-dev xmlto qemu-utils upx libelf-dev autoconf automake libtool autopoint device-tree-compiler antlr3 gperf
-        sudo -E apt-get -y autoremove
+        sudo -E apt-get autoremove -y
         sudo -E apt-get autoclean
 
     - name: Clone source code
@@ -37,7 +37,7 @@ jobs:
         sed -i "/pwluci/d" "feeds.conf.default"
         echo "src-git pwluci https://github.com/xiaorouji/openwrt-passwall.git;luci" >> feeds.conf.default
 
-    - name: Update Install feeds
+    - name: Update & Install feeds
       run: |
         cd openwrt
         ./scripts/feeds update -a
@@ -67,9 +67,9 @@ jobs:
         make -j$(nproc) V=s
 
     - name: Upload
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@main
       with:
-        name: masterp
+        name: ax6000
         path: openwrt/bin
 
     - name: Delete workflow runs
