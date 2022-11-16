@@ -44,8 +44,6 @@ jobs:
         cd openwrt
         ./scripts/feeds update -a
         ./scripts/feeds install -a
-        ./scripts/feeds update passwall
-        ./scripts/feeds install -a -f -p passwall
 
     - name: Configuration Customization
       run: |
