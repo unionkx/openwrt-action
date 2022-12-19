@@ -8,7 +8,7 @@ on:
 env:
   REPO_URL: https://github.com/openwrt/openwrt
   REPO_BRANCH: master
-  CONFIG_FILE: masterp.config
+  CONFIG_FILE: masterpx.config
   CUSTOM_SH: custom.sh
 
 jobs:
@@ -70,7 +70,7 @@ jobs:
     - name: Upload
       uses: actions/upload-artifact@v3
       with:
-        name: masterp
+        name: masterpx
         path: openwrt/bin
 
     - name: Delete workflow runs
