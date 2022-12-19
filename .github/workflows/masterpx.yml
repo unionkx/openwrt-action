@@ -1,4 +1,4 @@
-name: Build masterp
+name: Build masterpx
 
 on: 
   repository_dispatch:
