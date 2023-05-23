@@ -8,7 +8,7 @@ on:
 env:
   REPO_URL: https://github.com/openwrt/openwrt
   REPO_BRANCH: openwrt-22.03
-  CONFIG_FILE: 2203p.config
+  CONFIG_FILE: 2305p.config
   CUSTOM_SH: custom.sh
 
 jobs:
@@ -30,9 +30,9 @@ jobs:
 
     - name: Clone source code
       run: |
-        git clone -b openwrt-22.03 --single-branch https://github.com/openwrt/openwrt.git openwrt
+        git clone -b openwrt-23.05 --single-branch https://github.com/openwrt/openwrt.git openwrt
         cd openwrt
-        git clone -b openwrt-22.03 --single-branch https://github.com/openwrt/luci.git luci
+        git clone -b openwrt-23.05 --single-branch https://github.com/openwrt/luci.git luci
         sed -i "/pwpackages/d" "feeds.conf.default"
         echo "src-git pwpackages https://github.com/xiaorouji/openwrt-passwall.git;packages" >> "feeds.conf.default"
         sed -i "/pwluci/d" "feeds.conf.default"
@@ -68,7 +68,7 @@ jobs:
     - name: Upload
       uses: actions/upload-artifact@v3
       with:
-        name: 2203p
+        name: 2305p
         path: openwrt/bin
 
     - name: Delete workflow runs
