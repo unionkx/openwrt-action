@@ -1,13 +1,13 @@
-name: Build 2203p
+name: Build 2305p
 
 on: 
   repository_dispatch:
   workflow_dispatch:
-#  schedule:
-#    - cron: 26 1 * * *
+  schedule:
+    - cron: 26 1 * * *
 env:
   REPO_URL: https://github.com/openwrt/openwrt
-  REPO_BRANCH: openwrt-22.03
+  REPO_BRANCH: openwrt-23.05
   CONFIG_FILE: 2305p.config
   CUSTOM_SH: custom.sh
 
