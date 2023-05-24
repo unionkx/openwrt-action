@@ -1,4 +1,4 @@
-name: Build masterpv
+name: Build mainpv
 
 on: 
   repository_dispatch:
@@ -7,8 +7,8 @@ on:
 #    - cron: 18 1 * * *
 env:
   REPO_URL: https://github.com/openwrt/openwrt
-  REPO_BRANCH: master
-  CONFIG_FILE: masterpv.config
+  REPO_BRANCH: main
+  CONFIG_FILE: mainpv.config
   CUSTOM_SH: custom.sh
 
 jobs:
@@ -30,9 +30,9 @@ jobs:
 
     - name: Clone source code
       run: |
-        git clone -b master --single-branch https://github.com/openwrt/openwrt.git openwrt
+        git clone -b main --single-branch https://github.com/openwrt/openwrt.git openwrt
         cd openwrt
-        git clone -b master --single-branch https://github.com/openwrt/luci.git luci
+        git clone -b main --single-branch https://github.com/openwrt/luci.git luci
         sed -i "/pwpackages/d" "feeds.conf.default"
         echo "src-git pwpackages https://github.com/xiaorouji/openwrt-passwall.git;packages" >> "feeds.conf.default"
         sed -i "/pwluci/d" "feeds.conf.default"
@@ -66,7 +66,7 @@ jobs:
     - name: Upload
       uses: actions/upload-artifact@v3
       with:
-        name: masterpv
+        name: mainpv
         path: openwrt/bin
 
     - name: Delete workflow runs
