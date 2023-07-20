@@ -3,7 +3,7 @@ name: Build 2305p
 on: 
   repository_dispatch:
   workflow_dispatch:
-  schedule:
+#  schedule:
 #    - cron: 26 1 * * *
 env:
   REPO_URL: https://github.com/openwrt/openwrt
