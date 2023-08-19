@@ -7,7 +7,7 @@ on:
     - cron: 16 1 * * *
 env:
   REPO_URL: https://github.com/openwrt/openwrt
-  REPO_BRANCH: main
+  REPO_BRANCH: master
   CONFIG_FILE: mainpx.config
   CUSTOM_SH: custom.sh
 
@@ -24,13 +24,14 @@ jobs:
         DEBIAN_FRONTEND: noninteractive
       run: |
         sudo -E apt-get update
+        sudo -E apt-get -y full-upgrade
         sudo -E apt-get -y install build-essential clang flex g++ gawk gcc-multilib gettext git libncurses5-dev libssl-dev python3-distutils rsync unzip zlib1g-dev file wget asciidoc libz-dev libgcc1 libc6-dev msmtp xmlto qemu-utils libelf-dev autopoint device-tree-compiler antlr3 gperf
         sudo -E apt-get -y autoremove
         sudo -E apt-get autoclean
 
     - name: Clone source code
       run: |
-        git clone -b main --single-branch https://github.com/openwrt/openwrt.git openwrt
+        git clone -b master --single-branch https://github.com/openwrt/openwrt.git openwrt
         cd openwrt
         sed -i "/pwpackages/d" "feeds.conf.default"
         echo "src-git pwpackages https://github.com/xiaorouji/openwrt-passwall.git;packages" >> "feeds.conf.default"
