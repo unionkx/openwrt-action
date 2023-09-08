@@ -1,4 +1,4 @@
-name: Build 2305p
+name: Build 2305v
 
 on: 
   repository_dispatch:
