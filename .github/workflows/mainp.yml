@@ -1,4 +1,4 @@
-name: Build mainpx
+name: Build mainp
 
 on: 
   repository_dispatch:
