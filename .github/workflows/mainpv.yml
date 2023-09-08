@@ -8,7 +8,7 @@ on:
 env:
   REPO_URL: https://github.com/openwrt/openwrt
   REPO_BRANCH: main
-  CONFIG_FILE: mainpv.config
+  CONFIG_FILE: mainv.config
   CUSTOM_SH: custom.sh
 
 jobs:
@@ -60,7 +60,7 @@ jobs:
     - name: Upload
       uses: actions/upload-artifact@v3
       with:
-        name: mainpv
+        name: mainv
         path: openwrt/bin
 
     - name: Delete workflow runs
