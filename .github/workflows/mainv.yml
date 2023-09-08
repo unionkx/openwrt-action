@@ -1,4 +1,4 @@
-name: Build mainpv
+name: Build mainv
 
 on: 
   repository_dispatch:
