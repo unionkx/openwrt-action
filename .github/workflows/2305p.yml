@@ -8,7 +8,7 @@ on:
 env:
   REPO_URL: https://github.com/openwrt/openwrt
   REPO_BRANCH: openwrt-23.05
-  CONFIG_FILE: 2305p.config
+  CONFIG_FILE: 2305v.config
   CUSTOM_SH: custom.sh
 
 jobs:
@@ -63,7 +63,7 @@ jobs:
     - name: Upload
       uses: actions/upload-artifact@v3
       with:
-        name: 2305p
+        name: 2305v
         path: openwrt/bin
 
     - name: Delete workflow runs
