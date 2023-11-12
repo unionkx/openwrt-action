@@ -1,4 +1,4 @@
-name: Build 2305v
+name: Build mainx
 
 on: 
   repository_dispatch:
@@ -7,8 +7,8 @@ on:
 #    - cron: 6 1 * * *
 env:
   REPO_URL: https://github.com/openwrt/openwrt
-  REPO_BRANCH: openwrt-23.05
-  CONFIG_FILE: 2305v.config
+  REPO_BRANCH: main
+  CONFIG_FILE: mainx.config
   CUSTOM_SH: custom.sh
 
 jobs:
@@ -31,7 +31,7 @@ jobs:
 
     - name: Clone source code
       run: |
-        git clone -b openwrt-23.05 --single-branch https://github.com/openwrt/openwrt.git openwrt
+        git clone -b main --single-branch https://github.com/openwrt/openwrt.git openwrt
 
     - name: Update Install feeds
       run: |
@@ -61,7 +61,7 @@ jobs:
     - name: Upload
       uses: actions/upload-artifact@v3
       with:
-        name: 2305v
+        name: mainx
         path: openwrt/bin
 
     - name: Delete workflow runs
