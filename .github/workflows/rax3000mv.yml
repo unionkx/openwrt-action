@@ -1,4 +1,4 @@
-name: Build rax3000m
+name: Build rax3000mv
 
 on: 
   repository_dispatch:
@@ -6,7 +6,7 @@ on:
   schedule:
     - cron: 28 1 * * *
 env:
-  CONFIG_FILE: rax3000m.config
+  CONFIG_FILE: rax3000mv.config
   CUSTOM_SH: custom.sh
 
 jobs:
@@ -58,7 +58,7 @@ jobs:
     - name: Upload
       uses: actions/upload-artifact@v4
       with:
-        name: rax3000m
+        name: rax3000mv
         path: openwrt/bin
 
     - name: Delete workflow runs
