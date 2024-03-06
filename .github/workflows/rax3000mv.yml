@@ -3,8 +3,8 @@ name: Build rax3000mv
 on: 
   repository_dispatch:
   workflow_dispatch:
-  schedule:
-    - cron: 28 1 * * *
+#  schedule:
+#    - cron: 28 1 * * *
 env:
   CONFIG_FILE: rax3000mv.config
   CUSTOM_SH: custom.sh
