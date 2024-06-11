@@ -6,7 +6,7 @@ on:
   schedule:
     - cron: 0 1 * * 2
 env:
-  CONFIG_FILE: ax6000v.config
+  CONFIG_FILE: ax6000vmain.config
   CUSTOM_SH: custom.sh
 
 jobs:
