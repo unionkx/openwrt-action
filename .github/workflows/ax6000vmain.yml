@@ -47,12 +47,12 @@ jobs:
       run: |
         cd openwrt
         make defconfig
-        make download
+        make download -j1
 
     - name: Build firmware
       run: |
         cd openwrt
-        make -j2
+        make -j1
 
     - name: Upload
       uses: actions/upload-artifact@v4
