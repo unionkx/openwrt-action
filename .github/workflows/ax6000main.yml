@@ -1,4 +1,4 @@
-name: Build ax6000vimwrt
+name: Build ax6000main
 
 on: 
   repository_dispatch:
