@@ -3,8 +3,8 @@ name: Build ax6000main
 on: 
   repository_dispatch:
   workflow_dispatch:
-#  schedule:
-#    - cron: 8 1 * * 2
+  schedule:
+    - cron: 8 1 * * 2
 env:
   CONFIG_FILE: ax6000main.config
   CUSTOM_SH: custom.sh
