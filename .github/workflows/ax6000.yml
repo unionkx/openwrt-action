@@ -1,4 +1,4 @@
-name: Build ax6000main
+name: Build ax6000
 
 on: 
   repository_dispatch:
@@ -6,7 +6,7 @@ on:
   schedule:
     - cron: 8 1 * * 2
 env:
-  CONFIG_FILE: ax6000main.config
+  CONFIG_FILE: ax6000.config
   CUSTOM_SH: custom.sh
 
 jobs:
@@ -57,7 +57,7 @@ jobs:
     - name: Upload
       uses: actions/upload-artifact@v4
       with:
-        name: ax6000main
+        name: ax6000
         path: openwrt/bin
 
     - name: Delete workflow runs
