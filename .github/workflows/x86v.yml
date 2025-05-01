@@ -3,8 +3,8 @@ name: Build x86v
 on: 
   repository_dispatch:
   workflow_dispatch:
-#  schedule:
-#    - cron: 9 1 * * 2
+  schedule:
+    - cron: 9 1 * * 2
 env:
   CONFIG_FILE: x86v.config
   CUSTOM_SH: custom.sh
