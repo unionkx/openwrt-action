@@ -1,12 +1,12 @@
-name: Build ax6000_6
+name: Build x86vm
 
 on: 
   repository_dispatch:
   workflow_dispatch:
-#  schedule:
-#    - cron: 0 1 * * 2
+  schedule:
+    - cron: 2 0 * * 2
 env:
-  CONFIG_FILE: ax6000.config
+  CONFIG_FILE: x86v.config
   CUSTOM_SH: custom.sh
 
 jobs:
@@ -33,7 +33,7 @@ jobs:
 
     - name: Clone source code
       run: |
-        git clone -b openwrt-25.12 --single-branch https://github.com/openwrt/openwrt.git openwrt
+        git clone -b main --single-branch https://github.com/openwrt/openwrt.git openwrt
 
     - name: Update Install feeds
       run: |
@@ -62,7 +62,7 @@ jobs:
     - name: Upload
       uses: actions/upload-artifact@v7
       with:
-        name: ax6000_6
+        name: x86vm
         path: openwrt/bin
 
     - name: Delete workflow runs
