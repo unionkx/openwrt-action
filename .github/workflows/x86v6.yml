@@ -7,7 +7,7 @@ on:
     - cron: 6 22 * * 1
 env:
   CONFIG_FILE: x86v.config
-  CUSTOM_SH: custom.sh
+  CUSTOM_SH: custom6.sh
 
 jobs:
   build:
