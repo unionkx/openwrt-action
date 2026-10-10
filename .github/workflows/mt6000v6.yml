@@ -7,7 +7,7 @@ on:
 #    - cron: 7 1 * * 2
 env:
   CONFIG_FILE: mt6000v.config
-  CUSTOM_SH: custom.sh
+  CUSTOM_SH: custom6.sh
 
 jobs:
   build:
