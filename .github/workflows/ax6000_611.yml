@@ -3,8 +3,8 @@ name: Build ax6000_611
 on: 
   repository_dispatch:
   workflow_dispatch:
-  schedule:
-    - cron: 26 22 * * 1
+#  schedule:
+#    - cron: 26 22 * * 1
 env:
   CONFIG_FILE: ax6000.config
   CUSTOM_SH: custom611.sh
